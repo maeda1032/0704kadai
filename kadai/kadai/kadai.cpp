@@ -3,7 +3,7 @@
 
 class Charactor {
 public:
-	int AttackFase(int attack,bool playerCheck);
+	int AttackFase(bool playerCheck);
 
 	int Death(int enemyDeathCount)
 	{
@@ -21,8 +21,9 @@ public:
 	
 };
 
-int Charactor::AttackFase(int attack,bool playerCheck)
+int Charactor::AttackFase(bool playerCheck)
 {
+	int attack;
 	if (playerCheck == true)
 	{
 		attack = rand() % 20;
@@ -92,7 +93,7 @@ int main()
 	while (player->HP >= 0)
 	{
 		//Turn関数で現在のターンを加算
-		turn += Turn(turn);
+		turn = Turn(turn);
 
 		//攻撃力の決定
 		int a;
@@ -100,7 +101,7 @@ int main()
 		std::cin >> a;
 
 		//プレイヤーの攻撃ターン
-		player->AttackFase(player->Attack, true);
+		player->Attack = player->AttackFase(true);
 		if (player->Attack >= playerMaxAttack)
 		{
 			playerMaxAttack = player->Attack;
@@ -130,7 +131,7 @@ int main()
 
 		if (slimeHp > 0)
 		{
-			slime->AttackFase(slime->Attack,false);
+			slime->Attack = slime->AttackFase(false);
 
 			//playerの体力を減らす
 			playerHp -= slime->Attack;
@@ -152,7 +153,7 @@ int main()
 		if (goblinHp > 0)
 		{
 			//攻撃力の決定
-			goblin->AttackFase(goblin->Attack, false);
+			goblin->Attack = goblin->AttackFase(false);
 
 			//playerの体力を減らす
 			playerHp -= goblin->Attack;
