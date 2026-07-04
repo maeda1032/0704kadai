@@ -74,12 +74,14 @@ int main()
 	slime->HP = rand() % 51 + 50;
 	goblin->HP = rand() % 51 + 50;
 
-
+	int playerHp = player->HP;
+	int slimeHp = slime->HP;
+	int goblinHp = goblin->HP;
 
 	//初期体力の記載
 	std::cout << "PlayerHP" << player->HP << std::endl;
-	std::cout << "SlimeHP" << slime->HP << std::endl;
-	std::cout << "GoblinHP" << goblin->HP << std::endl;
+	std::cout << "SlimeHP" << slimeHp << std::endl;
+	std::cout << "GoblinHP" << goblinHp << std::endl;
 
 	//変数の初期値を0に
 	int turn = 0;
@@ -89,6 +91,7 @@ int main()
 	//ターンの処理を開始
 	while (player->HP >= 0)
 	{
+		//Turn関数で現在のターンを加算
 		turn += Turn(turn);
 
 		//攻撃力の決定
@@ -106,8 +109,8 @@ int main()
 		//1はすらいむのHPを減らす処理
 		if (a == 1)
 		{
-			slime->HP -= player->Attack;
-			if (slime->HP <= 0)
+			slimeHp -= player->Attack;
+			if (slimeHp <= 0)
 			{
 				enemyDeathCount++;
 			}
@@ -115,8 +118,8 @@ int main()
 		//2はごぶりんのHPを減らす処理
 		else
 		{
-			goblin->HP -= player->Attack;
-			if (goblin->HP <= 0)
+			goblinHp -= player->Attack;
+			if (goblinHp <= 0)
 			{
 				enemyDeathCount++;
 			}
@@ -125,15 +128,15 @@ int main()
 
 		//敵キャラクターの攻撃ターン
 
-		if (slime->HP > 0)
+		if (slimeHp > 0)
 		{
 			slime->AttackFase(slime->Attack,false);
 
 			//playerの体力を減らす
-			player->HP -= slime->Attack;
+			playerHp -= slime->Attack;
 
 			//hp0以下なら死亡
-			if (player->HP <= 0)
+			if (playerHp <= 0)
 			{
 				std::cout << "playerが死亡しました" << std::endl;
 				break;
@@ -146,16 +149,16 @@ int main()
 			}
 		}
 
-		if (goblin->HP > 0)
+		if (goblinHp > 0)
 		{
 			//攻撃力の決定
 			goblin->AttackFase(goblin->Attack, false);
 
 			//playerの体力を減らす
-			player->HP -= goblin->Attack;
+			playerHp -= goblin->Attack;
 
 			//hp0以下なら死亡
-			if (player->HP <= 0)
+			if (playerHp <= 0)
 			{
 				std::cout << "playerが死亡しました" << std::endl;
 				break;
@@ -172,9 +175,9 @@ int main()
 		{
 			break;
 		}
-		std::cout << "slimeの残りHP" << slime->HP << std::endl;
-		std::cout << "goblinの残りHP" << goblin->HP << std::endl;
-		std::cout <<"playerの残りhp" << player->HP << std::endl;
+		std::cout << "slimeの残りHP" << slimeHp << std::endl;
+		std::cout << "goblinの残りHP" << goblinHp << std::endl;
+		std::cout <<"playerの残りhp" << playerHp << std::endl;
 
 	}
 

@@ -123,10 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="kadai.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Slime.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
